@@ -4,10 +4,16 @@ import Axios from 'axios';
 export default function WeatherDashboard() {
 
     const REACT_APP_APIKEY = process.env.REACT_APP_APIKEY;  
-    console.log(REACT_APP_APIKEY)
 
     const [search, setSearch]=useState("")
-    const [Data, setData] = useState()
+    const [Data, setData] = useState({
+        Name:'',
+        Weather:'',
+        Icon: "",
+        MainTemp:'',
+        MinTemp:'',
+        MaxTemp:''
+    })
 
     const handleChange = e => {
         let zip = e.target.value
@@ -22,14 +28,29 @@ export default function WeatherDashboard() {
         Axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=${search},us&appid=${REACT_APP_APIKEY}`)
         .then((response) =>  {
             console.log(response.data.name)
-            setData(response.data.name)
+            let Main = Math.round((response.data.main.temp - 273.15) * 9/5 + 32)
+            let Mix = Math.round((response.data.main.temp_min / 273.15) * 9/5 + 32)
+            let Max = Math.round((response.data.main.temp_max / 273.15) * 9/5 + 32)
+            setData({
+                Name: response.data.name,
+                Weather: response.data.weather[0].description,
+                Icon: `http://openweathermap.org/img/w/` + response.data.weather[0].icon + `.png`,
+                MainTemp: Main,
+                MaxTemp: Max,
+                MinTem: Mix
+            })
         })
     }
 
 
     return (
         <div>
-            <h1>{Data}</h1>
+            <h1>{Data.Name}</h1>
+            <img src={Data.Icon} />
+            <h2>{Data.Weather}</h2>
+            <h3>{Data.MainTemp}</h3>
+            <h4>{Data.MinTemp}</h4>
+            <h5>{Data.MaxTemp}</h5>
                 <hr></hr>
                 <input type="text" onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Update</button>
