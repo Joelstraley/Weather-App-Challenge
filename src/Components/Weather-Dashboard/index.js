@@ -65,11 +65,14 @@ export default function WeatherDashboard() {
     }
      
     useEffect(() => {
-        if(localStorage.getItem("zip")){
-            let search = localStorage.getItem("zip")
-            setSearch(search)
+        if(search === null){
+/*             let search = localStorage.getItem("zip")
+            console.log(search) */
+            let zip = JSON.parse(localStorage.getItem("zip"))
+            setSearch(zip)
+            console.log(search)
             getWeather()
-        }
+        } console.log(search)
     },[])
      
 
@@ -78,7 +81,7 @@ export default function WeatherDashboard() {
     -fill out README */
 
     return (
-        <div className="container">
+       /*  <div className="container">
             <h2>{message ? message:null}</h2>
             {Data.Name ? <h1>{Data.Name}</h1> : <></> }
             {Data.Icon ? <img src={Data.Icon} alt="weather icon"/> : <></> }
@@ -89,10 +92,28 @@ export default function WeatherDashboard() {
 
                 <hr></hr>
             <form onClick={handleKeypress}>
-                <label for="zip">Zip Code:</label><br />
-                <input type="text" name="zip" onChange={handleChange}></input>
+                <label >Zip Code:</label><br />
+                <input type="text"  onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Update</button>
-            </form>
-        </div>
+            </form> 
+        </div>*/
+        <main className="container">
+            <section className="header">
+                <h1 className="cityName">New York</h1> 
+                <img src="http://openweathermap.org/img/w/03d.png" alt="weather icon" className="icon"/>
+                
+            </section>
+            <h4 className="weatherDescription">Scattered Thunderstorms</h4> 
+                <h3 className="mainTemp">67°</h3> 
+                <h5 className="minTemp">52°</h5> 
+                <h5 className="maxTemp">72°</h5> 
+
+            <form className="" onClick={handleKeypress}>
+            <hr/>
+                <label >Zip Code:</label><br />
+                <input type="text"  onChange={handleChange}></input>
+                <button onClick={handleSubmit}>Update</button>
+            </form> 
+        </main>
     )
 }
