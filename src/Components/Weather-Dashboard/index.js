@@ -5,7 +5,8 @@ export default function WeatherDashboard() {
 
     const REACT_APP_APIKEY = process.env.REACT_APP_APIKEY;  
 
-    const [search, setSearch]=useState("")
+    const [search, setSearch] = useState("")
+    const [message, setMessage] = useState()
     const [Data, setData] = useState({
         Name:'',
         Weather:'',
@@ -45,14 +46,15 @@ export default function WeatherDashboard() {
                 MaxTemp: Max,  
                 MinTem: Mix
             })
-        })
+            setMessage(null)
+        }).catch((error) => { console.log(error); setMessage("Please enter a valid zip code")})
     }
-
+     
     useEffect(() => {
         if(localStorage.getItem("zip")){
             let search = localStorage.getItem("zip")
-        setSearch(search)
-        getWeather()
+            setSearch(search)
+            getWeather()
         }
     },[])
      
@@ -65,11 +67,13 @@ export default function WeatherDashboard() {
     return (
         <div>
             <h1>{Data.Name}</h1>
+            <h2>{message?message:null}</h2>
             {Data.Icon ? <img src={Data.Icon} alt="weather icon"/> : <></> }
             <h2>{Data.Weather}</h2>
-            <h3>{Data.MainTemp}</h3>
-            <h4>{Data.MinTemp}</h4>
-            <h5>{Data.MaxTemp}</h5>
+            {Data.MainTemp ? <h3>{Data.MainTemp}°</h3> : <></> }
+            {Data.MinTemp ? <h5>{Data.MinTemp}°</h5> : <></> }
+            {Data.MaxTemp ? <h5>{Data.MaxTemp}°</h5> : <></> }
+
                 <hr></hr>
                 <input type="text" onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Update</button>
