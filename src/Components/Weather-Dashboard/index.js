@@ -28,28 +28,32 @@ export default function WeatherDashboard() {
     const getWeather = () => {
         Axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=${search},us&appid=${REACT_APP_APIKEY}`)
         .then((response) =>  {
-            console.log(response.data.name)
+            
+            let string = response.data.weather[0].description
+            const capitalizeDescription = str => str.replace(/^(.)|\s+(.)/g, c => c.toUpperCase());
+            let desc = capitalizeDescription(string); 
+
             let Main = Math.round((response.data.main.temp - 273.15) * 9/5 + 32)
             let Mix = Math.round((response.data.main.temp_min / 273.15) * 9/5 + 32)
             let Max = Math.round((response.data.main.temp_max / 273.15) * 9/5 + 32)
+            
             setData({
                 Name: response.data.name,
-                Weather: response.data.weather[0].description,
+                Weather: desc,
                 Icon: `http://openweathermap.org/img/w/` + response.data.weather[0].icon + `.png`,
                 MainTemp: Main,
-                MaxTemp: Max,
+                MaxTemp: Max,  
                 MinTem: Mix
             })
         })
     }
 
     useEffect(() => {
-        
-        let search = localStorage.getItem("zip")
-        console.log(search)
+        if(localStorage.getItem("zip")){
+            let search = localStorage.getItem("zip")
         setSearch(search)
         getWeather()
-       
+        }
     },[])
      
 
