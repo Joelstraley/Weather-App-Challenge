@@ -47,7 +47,11 @@ export default function WeatherDashboard() {
                 MinTem: Mix
             })
             setMessage(null)
-        }).catch((error) => { console.log(error); setMessage("Please enter a valid zip code")})
+        }).catch((error) => { 
+            console.log(error); 
+            setData({Name: null, Weather: null, Icon: null, MainTemp: null, MaxTemp: null, MinTemp: null});
+            setMessage("Please enter a valid zip code"); 
+            })
     }
      
     useEffect(() => {
@@ -66,10 +70,10 @@ export default function WeatherDashboard() {
 
     return (
         <div>
-            <h1>{Data.Name}</h1>
             <h2>{message?message:null}</h2>
+            {Data.Name ? <h1>{Data.Name}</h1> : <></> }
             {Data.Icon ? <img src={Data.Icon} alt="weather icon"/> : <></> }
-            <h2>{Data.Weather}</h2>
+            {Data.Weather ? <h2>{Data.Weather}</h2> : <></> }
             {Data.MainTemp ? <h3>{Data.MainTemp}°</h3> : <></> }
             {Data.MinTemp ? <h5>{Data.MinTemp}°</h5> : <></> }
             {Data.MaxTemp ? <h5>{Data.MaxTemp}°</h5> : <></> }
