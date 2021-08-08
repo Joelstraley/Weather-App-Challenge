@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 export default function WeatherDashboard() {
@@ -18,6 +18,7 @@ export default function WeatherDashboard() {
     const handleChange = e => {
         let zip = e.target.value
         setSearch(zip)
+        localStorage.setItem("zip",zip)
     }
 
     const handleSubmit = e => {
@@ -42,11 +43,25 @@ export default function WeatherDashboard() {
         })
     }
 
+    useEffect(() => {
+        
+        let search = localStorage.getItem("zip")
+        console.log(search)
+        setSearch(search)
+        getWeather()
+       
+    },[])
+     
+
+    /* TODO: 
+    - add Message if no zip code or error
+    - CSS styling 
+    -fill out README */
 
     return (
         <div>
             <h1>{Data.Name}</h1>
-            <img src={Data.Icon} />
+            {Data.Icon ? <img src={Data.Icon} alt="weather icon"/> : <></> }
             <h2>{Data.Weather}</h2>
             <h3>{Data.MainTemp}</h3>
             <h4>{Data.MinTemp}</h4>
