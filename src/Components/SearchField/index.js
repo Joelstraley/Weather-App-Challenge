@@ -5,18 +5,18 @@ import "./style.css"
 
 export default function SearchField() {
 
-    const REACT_APP_APIKEY = process.env.REACT_APP_APIKEY;  
-   
+    const REACT_APP_APIKEY = process.env.REACT_APP_APIKEY;
+
     const [search, setSearch] = useState(localStorage.getItem("zip"))
     const [message, setMessage] = useState()
     const [data, setData] = useState({
-        Id: '',
-        City: '',
-        Weather: '',
-        Icon: '',
-        MainTemp: '',
-        MinTemp: '',
-        MaxTemp: ''
+        Id: null,
+        City: null,
+        Weather: null,
+        Icon: null,
+        MainTemp: null,
+        MinTemp: null,
+        MaxTemp: null
     })
 
     const handleChange = e => {
@@ -30,15 +30,31 @@ export default function SearchField() {
         getWeather()
     }
 
+
+ /* if ENTER is hit run handleSubmit */
     const handleKeypress = e => {
-        /* if ENTER is hit run handleSubmit */
         if (e.keyCode === 13) {
         handleSubmit(e);
         }
     }
 
+ /* converts temperatures from Kelvin to Fahrenheit */
+    const kelvinToFahrenheit = (temp) => {
+       return Math.round((temp - 273.15) * 9/5 + 32)
+    }
 
-    /* seperate Kelvin convert function */
+ /* clear out Weather Data */
+    const emptyWeatherData = () => {
+        setData({
+            Id: null,
+            City: null,
+            Weather: null,
+            Icon: null,
+            MainTemp: null,
+            MinTemp: null,
+            MaxTemp: null
+        })
+    }
 
     const getWeather = () => {
         return Axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=${search},us&appid=${REACT_APP_APIKEY}`)
@@ -47,24 +63,19 @@ export default function SearchField() {
             /* API has Weather Description in lower case, below capitalizes each word*/
             let Weather = response.data.weather[0].description.replace(/^(.)|\s+(.)/g, c => c.toUpperCase())
 
-            /* converts temperatures from Kelvin to Fahrenheit */
-            let Main = Math.round((response.data.main.temp - 273.15) * 9/5 + 32)
-            let Min = Math.round((response.data.main.temp_min - 273.15) * 9/5 + 32)
-            let Max = Math.round((response.data.main.temp_max - 273.15) * 9/5 + 32)
-            
             setData({
                 City: response.data.name,
                 Weather: Weather,
                 Icon: `http://openweathermap.org/img/w/` + response.data.weather[0].icon + `.png`,
-                MainTemp: Main, /* call Kelvin function here */
-                MaxTemp: Max,  
-                MinTemp: Min,
+                MainTemp:kelvinToFahrenheit(response.data.main.temp),
+                MaxTemp: kelvinToFahrenheit(response.data.main.temp_max), 
+                MinTemp: kelvinToFahrenheit(response.data.main.temp_min),
                 id: response.data.weather[0].id
             })
             setMessage(null)
         }).catch((err) => { 
             console.error(err) 
-            setData(/* {Name: null, Weather: null, Icon: null, MainTemp: null, MaxTemp: null, MinTemp: null} */);
+            emptyWeatherData();
             setMessage("Please enter a valid zip code"); 
             })
     }
@@ -76,10 +87,6 @@ export default function SearchField() {
         initSearch();
     }, [])  
      
-    /* TODO: 
-    -update API key
-    put in an If local storage is empty check 
-    */
 
     return (
         <main className="container">
@@ -99,7 +106,7 @@ export default function SearchField() {
             <hr/>
 
             <form onClick={handleKeypress}>
-                <label className="zipLabel">Zip Code:</label><br />
+                <p className="zipLabel"><label>Zip Code:</label></p>
                 <input type="text" onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Update</button>
             </form> 

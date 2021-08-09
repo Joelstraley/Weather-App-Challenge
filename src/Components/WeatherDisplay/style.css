@@ -12,6 +12,7 @@ hr {
   }
   
 .zipLabel {
+    margin-bottom: auto;
     margin-left: -150px;
     font-size: 12px;
 }
