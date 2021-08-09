@@ -6,3 +6,4 @@ User inputs zip code and recives City Name, Current Temperature with High and lo
 This app utilizes Open-Weather's Current Weather API. 
 
 ## Screenshot: 
+![alt text](https://github.com/Joelstraley/Weather-App-Challenge/blob/main/public/assets/WeatherAppChallengeScreenshot.png?raw=true)
