@@ -90,12 +90,15 @@
 
 .maxTemp {
   font-weight: 400;
+  margin-left: 15px;
 }
 
 .maxMin {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: -30px;
+  margin-bottom: 20px;
 }
 
 .degree {
@@ -107,7 +110,7 @@ hr {
 }
 
 .zipLabel {
-  margin-left: -130px;
+  margin-left: -120px;
   font-size: 12px;
 }
 
@@ -128,13 +131,16 @@ input:focus {
 }
 
 button {
-  padding: 5px 30px 5px 30px;
-  margin: 10px;
+  padding: 7px 30px 7px 30px;
+  margin: 5px;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  font-size: small;
+  font-weight: 800;
+  font-size: 10px;
   box-shadow: initial;
   border-radius: 5px;
-  border: 1px solid #1111115d;
-  box-shadow:  0px 1px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid #0808085d;
+  box-shadow:  inset 10px 10px 30px rgba(134, 134, 134, 0.2);
+  background-color: rgba(187, 184, 184, 0.562);
+  text-shadow: 0px 1px rgb(228, 221, 221)
+
 }

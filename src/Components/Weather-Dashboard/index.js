@@ -111,9 +111,9 @@ export default function WeatherDashboard() {
                 <h3 className="mainTemp">16<sup className="mainTemp degree">&deg;</sup></h3> 
             </section>
 
-            <section>
-                <h5 className="minTemp maxMin">52<sup className="mainTemp degree">&deg;</sup></h5> 
-                <h5 className="maxTemp maxMin">72<sup className="mainTemp degree">&deg;</sup></h5> 
+            <section className="maxMin">
+                <h5 className="minTemp">52<sup className="degree">&deg;</sup></h5> 
+                <h5 className="maxTemp">72<sup className="degree">&deg;</sup></h5> 
             </section>
 
             <form className="inputForm" onClick={handleKeypress}>
