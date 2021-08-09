@@ -1,51 +1,50 @@
-.header {
+.container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  padding-top: 1em;
 }
 
-.cityName {
-  font-weight: 400;
-  font-size: 38px;
+hr {
+  height: 1%;
+  width: 60%;
+  margin-bottom: 40px;
 }
 
-.icon {
-  height: 2em;
-  width: 2em;
-  margin: 40px 0 0 5px;
-}
-
-.weatherDescription {
-  font-weight: 400;
-  font-size: 14px;
-  margin-top: -1.5rem;
-  margin-bottom: 30px;
-}
-
-.mainTemp {
-  font-weight: 400;
-  font-size: 48px;
-  justify-content: center;
+.zipLabel {
   margin-top: auto;
+  margin-bottom: auto;
+  margin-left: -150px;
+  font-size: 14px;
 }
 
-.minTemp {
-  font-weight: 400;
+input {
+  width: 5em;
+  padding: 6px 10px;
+  background: #fff;
+  color: #45474b;
+  border-radius: 2px;
+  border: 1px solid #1111115d;
+  box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.144);
+  font-weight: 200;
+  font-size: 12px;
 }
 
-.maxTemp {
-  font-weight: 400;
-  margin-left: 25px;
+input:focus {
+  outline: none;
 }
 
-.maxMin {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: -40px;
-  margin-bottom: 20px;
-}
-
-.degree {
-  font: 0.75em 'Fira Sans', sans-serif;
+button {
+  padding: 7px 40px 7px 40px;
+  margin: 5px 0px 5px 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  box-shadow: initial;
+  border-radius: 6px;
+  border: 1px solid #0808085d;
+  box-shadow: inset 30px 10px 20px rgba(206, 204, 204, 0.849);
+  background-color: 3px rgba(68, 67, 67, 0.788);
+  text-shadow: 0px 1px rgb(255, 255, 255);
+  color: rgba(63, 60, 60, 0.986);
 }

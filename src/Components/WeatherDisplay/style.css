@@ -1,49 +1,53 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 1em
-  }
-
-hr {
-    height: 1%;
-    width: 60%;
-    margin-bottom: 40px;
-  }
-  
-.zipLabel {
-    margin-bottom: auto;
-    margin-left: -150px;
-    font-size: 12px;
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-input {
-    width: 5em;
-    padding: 6px 10px;
-    background: #fff;
-    color: #45474b;
-    border-radius: 2px;
-    border: 1px solid #1111115d;
-    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.116);
-    font-weight: 200;
-    font-size: 12px;
+.cityName {
+  font-weight: 400;
+  font-size: 38px;
 }
 
-input:focus {
-    outline: none
+.icon {
+  height: 2em;
+  width: 2em;
+  margin: 40px 0 0 5px;
 }
 
-button {
-    padding: 7px 40px 7px 40px;
-    margin: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 800;
-    font-size: 12px;
-    box-shadow: initial;
-    border-radius: 5px;
-    border: 1px solid #0808085d;
-    box-shadow:  inset 30px 10px 20px rgba(206, 204, 204, 0.849);
-    background-color: 3px rgba(255, 249, 249, 0.562);
-    text-shadow: 0px 1px rgb(255, 255, 255);
-    color: rgba(63, 60, 60, 0.986); 
+.weatherDescription {
+  font-weight: 400;
+  font-size: 18px;
+  margin-top: -1.5rem;
+  margin-bottom: 30px;
+}
+
+.mainTemp {
+  font-weight: 400;
+  font-size: 48px;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.minTemp {
+  font-weight: 400;
+}
+
+.maxTemp {
+  font-weight: 400;
+  margin-left: 35px;
+}
+
+.maxMin {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  font-size: 24px;
+}
+
+.degree {
+  font: 0.75em 'Fira Sans', sans-serif;
 }
