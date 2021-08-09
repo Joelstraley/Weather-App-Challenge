@@ -8,7 +8,7 @@ const REACT_APP_APIKEY = process.env.REACT_APP_APIKEY
 // clear out Weather Data
 const makeEmptyWeatherData = () => ({
   Id: null,
-  City: null,
+  City: '',
   Weather: null,
   Icon: null,
   MainTemp: null,
@@ -76,7 +76,7 @@ export default function SearchField() {
       })
       .catch((err) => {
         console.error(err)
-        makeEmptyWeatherData()
+        setData(makeEmptyWeatherData())
         setMessage('Please enter a valid zip code')
       })
   }

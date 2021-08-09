@@ -1,50 +1,51 @@
 .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
-  
+
 .cityName {
-    font-weight: 400;
-    font-size: 2rem;
+  font-weight: 400;
+  font-size: 38px;
 }
 
 .icon {
-    height: 2rem;
-    width: 2rem;
-    margin: 2em 0 0 .5em;
+  height: 2em;
+  width: 2em;
+  margin: 40px 0 0 5px;
 }
 
-.weatherDescription { 
-    font-weight: 400;
-    font-size: 14px;
-    margin-top: -1.5rem;
+.weatherDescription {
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: -1.5rem;
+  margin-bottom: 30px;
 }
 
 .mainTemp {
-    font-weight: 400;
-    font-size: 2rem;
-    justify-content: center;
-    margin-top: 20px;
+  font-weight: 400;
+  font-size: 48px;
+  justify-content: center;
+  margin-top: auto;
 }
 
 .minTemp {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .maxTemp {
-    font-weight: 400;
-    margin-left: 15px;
+  font-weight: 400;
+  margin-left: 25px;
 }
 
 .maxMin {
-    display: flex;
-    flex-direction: row;      
-    justify-content: center;
-    margin-top: -40px; 
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: -40px;
+  margin-bottom: 20px;
 }
 
 .degree {
-    font: .75em 'Fira Sans', sans-serif;
+  font: 0.75em 'Fira Sans', sans-serif;
 }
