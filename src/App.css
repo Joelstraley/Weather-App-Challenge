@@ -14,17 +14,6 @@
   }
 }
 
-.App-header {
-/*   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white; */
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -70,8 +59,7 @@
 }
 
 
-.weatherDescription {
-  position: relative;
+.weatherDescription { 
   font-weight: 400;
   font-size: 14px;
   margin-top: -1.5rem;
@@ -86,6 +74,7 @@
 
 .minTemp {
   font-weight: 400;
+
 }
 
 .maxTemp {
@@ -95,9 +84,9 @@
 
 .maxMin {
   display: flex;
-  flex-direction: row;
+  flex-direction: row;      
   justify-content: center;
-  margin-top: -30px;
+  margin-top: -40px; 
   margin-bottom: 20px;
 }
 
@@ -106,22 +95,25 @@
 }
 
 hr {
-  margin-bottom: 20px;
+  height: 1%;
+  width: 50%;
+  margin-bottom: 40px;
 }
 
+
 .zipLabel {
-  margin-left: -120px;
+  margin-left: -150px;
   font-size: 12px;
 }
 
 input {
   width: 5em;
-  padding: 5px;
+  padding: 5px 10px;
   background: #fff;
   color: #45474b;
   border-radius: 2px;
   border: 1px solid #1111115d;
-  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 1px 2px rgba(187, 165, 165, 0.2);
   font-weight: 200;
   font-size: 12px;
 }
@@ -131,16 +123,17 @@ input:focus {
 }
 
 button {
-  padding: 7px 30px 7px 30px;
+  padding: 7px 40px 7px 40px;
   margin: 5px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 800;
   font-size: 10px;
   box-shadow: initial;
   border-radius: 5px;
+ /*  background-image: linear-gradient(rgba(196, 196, 196, 0), rgba(245, 241, 241, 0.74)); */
   border: 1px solid #0808085d;
-  box-shadow:  inset 10px 10px 30px rgba(134, 134, 134, 0.2);
-  background-color: rgba(187, 184, 184, 0.562);
-  text-shadow: 0px 1px rgb(228, 221, 221)
-
+  box-shadow:  inset 30px 10px 20px rgba(206, 204, 204, 0.849);
+  background-color: 3px rgba(255, 249, 249, 0.562);
+  text-shadow: 0px 1px rgb(255, 255, 255);
+  color: rgba(63, 60, 60, 0.986); 
 }
