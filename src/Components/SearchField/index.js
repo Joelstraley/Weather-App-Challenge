@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import WeatherDisplay from '../WeatherDisplay';
 
-export default function WeatherDashboard() {
+export default function SearchField() {
 
     const REACT_APP_APIKEY = process.env.REACT_APP_APIKEY;  
 
     const [search, setSearch] = useState("")
     const [message, setMessage] = useState()
-    const [Data, setData] = useState({
-        Name:'',
-        Weather:'',
-        Icon: "",
-        MainTemp:'',
-        MinTemp:'',
-        MaxTemp:''
-    })
+    const [Data, setData] = useState([{
+        Id: "",
+        City: '',
+        Weather: '',
+        Icon: '',
+        MainTemp: '',
+        MinTemp: '',
+        MaxTemp: ''
+    }])
 
     const handleChange = e => {
         let zip = e.target.value
@@ -23,16 +25,16 @@ export default function WeatherDashboard() {
     }
 
     const handleSubmit = e => {
-            e.preventDefault();
-            getWeather()
-        }
+        e.preventDefault();
+        getWeather()
+    }
 
     const handleKeypress = e => {
         /* if ENTER is hit run handleSubmit */
         if (e.keyCode === 13) {
         handleSubmit();
         }
-    };
+    }
 
     const getWeather = () => {
         Axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=${search},us&appid=${REACT_APP_APIKEY}`)
@@ -49,12 +51,13 @@ export default function WeatherDashboard() {
             let Max = Math.round((response.data.main.temp_max / 273.15) * 9/5 + 32)
             
             setData({
-                Name: response.data.name,
+                City: response.data.name,
                 Weather: desc,
                 Icon: `http://openweathermap.org/img/w/` + response.data.weather[0].icon + `.png`,
                 MainTemp: Main,
                 MaxTemp: Max,  
-                MinTem: Mix
+                MinTemp: Mix,
+                id: response.data.weather[0].id
             })
             setMessage(null)
         }).catch((error) => { 
@@ -64,39 +67,51 @@ export default function WeatherDashboard() {
             })
     }
      
-    useEffect(() => {
+ /*    useEffect(() => {
         if(search === null){
-/*             let search = localStorage.getItem("zip")
-            console.log(search) */
+             let search = localStorage.getItem("zip")
+            console.log(search)
             let zip = JSON.parse(localStorage.getItem("zip"))
             setSearch(zip)
             console.log(search)
             getWeather()
         } console.log(search)
-    },[])
+    },[]) */
      
 
     /* TODO: 
-    - CSS styling 
     -fill out README */
 
     return (
-       /*  <div className="container">
-            <h2>{message ? message:null}</h2>
-            {Data.Name ? <h1>{Data.Name}</h1> : <></> }
-            {Data.Icon ? <img src={Data.Icon} alt="weather icon"/> : <></> }
-            {Data.Weather ? <h2>{Data.Weather}</h2> : <></> }
-            {Data.MainTemp ? <h3>{Data.MainTemp}°</h3> : <></> }
-            {Data.MinTemp ? <h5>{Data.MinTemp}°</h5> : <></> }
-            {Data.MaxTemp ? <h5>{Data.MaxTemp}°</h5> : <></> }
-
+        <div className="container">
+            <WeatherDisplay
+                key={Data.id} 
+                City={Data.City}
+                Icon={Data.Icon}
+                Weather={Data.Weather}
+                MainTemp={Data.MainTemp}
+                MinTemp={Data.MinTemp}
+                MaxTemp={Data.MaxTemp}  />
+              
                 <hr></hr>
             <form onClick={handleKeypress}>
                 <label >Zip Code:</label><br />
                 <input type="text"  onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Update</button>
             </form> 
-        </div>*/
+    
+       
+{/*       <div className="container">
+            <h2>{message ? message:null}</h2>
+                {Data.City ? <h1>{Data.City}</h1> : <></> }
+                {Data.Icon ? <img src={Data.Icon} alt="weather icon"/> : <></> }
+                {Data.Weather ? <h2>{Data.Weather}</h2> : <></> }
+                {Data.MainTemp ? <h3>{Data.MainTemp}°</h3> : <></> }
+                {Data.MinTemp ? <h5>{Data.MinTemp}°</h5> : <></> }
+                {Data.MaxTemp ? <h5>{Data.MaxTemp}°</h5> : <></> }
+        </div> */}
+      
+      {/* 
         <main className="container">
             <section className="header">
                 <h1 className="cityName">New York</h1> 
@@ -122,6 +137,10 @@ export default function WeatherDashboard() {
                 <input type="text"  onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Update</button>
             </form> 
-        </main>
+        </main> */}
+
+        </div>
+
+
     )
 }

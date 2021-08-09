@@ -1,10 +1,10 @@
 import './App.css';
-import WeatherDashboard from './Components/Weather-Dashboard';
+import SearchField from './Components/SearchField';
 
 function App() {
   return (
     <div className="App">
-      <WeatherDashboard />
+      <SearchField />
     </div>
   );
 }
