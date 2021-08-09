@@ -7,17 +7,17 @@ export default function SearchField() {
 
     const REACT_APP_APIKEY = process.env.REACT_APP_APIKEY;  
    
-    const [search, setSearch] = useState("")
+    const [search, setSearch] = useState(localStorage.getItem("zip"))
     const [message, setMessage] = useState()
-    const [data, setData] = useState([{
-        Id: "",
+    const [data, setData] = useState({
+        Id: '',
         City: '',
         Weather: '',
         Icon: '',
         MainTemp: '',
         MinTemp: '',
         MaxTemp: ''
-    }])
+    })
 
     const handleChange = e => {
         let zip = e.target.value
@@ -26,59 +26,57 @@ export default function SearchField() {
     }
 
     const handleSubmit = e => {
+        e.preventDefault()
         getWeather()
     }
 
     const handleKeypress = e => {
         /* if ENTER is hit run handleSubmit */
         if (e.keyCode === 13) {
-        handleSubmit();
+        handleSubmit(e);
         }
     }
 
+
+    /* seperate Kelvin convert function */
+
     const getWeather = () => {
-        console.log("this is getWeather", search)
-        Axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=${search},us&appid=${REACT_APP_APIKEY}`)
+        return Axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=${search},us&appid=${REACT_APP_APIKEY}`)
         .then((response) =>  {
             
             /* API has Weather Description in lower case, below capitalizes each word*/
-            let string = response.data.weather[0].description
-            const capitalizeDescription = str => str.replace(/^(.)|\s+(.)/g, c => c.toUpperCase());
-            let desc = capitalizeDescription(string); 
+            let Weather = response.data.weather[0].description.replace(/^(.)|\s+(.)/g, c => c.toUpperCase())
 
             /* converts temperatures from Kelvin to Fahrenheit */
             let Main = Math.round((response.data.main.temp - 273.15) * 9/5 + 32)
-            let Mix = Math.round((response.data.main.temp_min / 273.15) * 9/5 + 32)
-            let Max = Math.round((response.data.main.temp_max / 273.15) * 9/5 + 32)
+            let Min = Math.round((response.data.main.temp_min - 273.15) * 9/5 + 32)
+            let Max = Math.round((response.data.main.temp_max - 273.15) * 9/5 + 32)
             
             setData({
                 City: response.data.name,
-                Weather: desc,
+                Weather: Weather,
                 Icon: `http://openweathermap.org/img/w/` + response.data.weather[0].icon + `.png`,
-                MainTemp: Main,
+                MainTemp: Main, /* call Kelvin function here */
                 MaxTemp: Max,  
-                MinTemp: Mix,
+                MinTemp: Min,
                 id: response.data.weather[0].id
             })
             setMessage(null)
-        }).catch((error) => { 
-            console.log(error); 
-            setData({Name: null, Weather: null, Icon: null, MainTemp: null, MaxTemp: null, MinTemp: null});
+        }).catch((err) => { 
+            console.error(err) 
+            setData(/* {Name: null, Weather: null, Icon: null, MainTemp: null, MaxTemp: null, MinTemp: null} */);
             setMessage("Please enter a valid zip code"); 
             })
     }
           
   useEffect(() => {
-        let zip = localStorage.getItem("zip")
-        setSearch(zip)
-        console.log(zip)
-        getWeather()
+        const initSearch =  async () =>{
+            await getWeather() 
+        }
+        initSearch();
     }, [])  
      
-
-
     /* TODO: 
-    -fill out README
     -update API key
     put in an If local storage is empty check 
     */
@@ -102,7 +100,7 @@ export default function SearchField() {
 
             <form onClick={handleKeypress}>
                 <label className="zipLabel">Zip Code:</label><br />
-                <input type="text"  onChange={handleChange}></input>
+                <input type="text" onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Update</button>
             </form> 
         </main>
