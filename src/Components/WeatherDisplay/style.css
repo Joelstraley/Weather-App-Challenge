@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 1em
+  }
+
+hr {
+    height: 1%;
+    width: 80%;
+    margin-bottom: 40px;
+  }
+  
+.zipLabel {
+    margin-left: -150px;
+    font-size: 12px;
+}
+
+input {
+    width: 5em;
+    padding: 6px 10px;
+    background: #fff;
+    color: #45474b;
+    border-radius: 2px;
+    border: 1px solid #1111115d;
+    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.116);
+    font-weight: 200;
+    font-size: 12px;
+}
+
+input:focus {
+    outline: none
+}
+
+button {
+    padding: 7px 40px 7px 40px;
+    margin: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    box-shadow: initial;
+    border-radius: 5px;
+    border: 1px solid #0808085d;
+    box-shadow:  inset 30px 10px 20px rgba(206, 204, 204, 0.849);
+    background-color: 3px rgba(255, 249, 249, 0.562);
+    text-shadow: 0px 1px rgb(255, 255, 255);
+    color: rgba(63, 60, 60, 0.986); 
+}

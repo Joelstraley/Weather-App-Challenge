@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import WeatherDisplay from '../WeatherDisplay';
+import "./style.css"
 
 export default function SearchField() {
 
     const REACT_APP_APIKEY = process.env.REACT_APP_APIKEY;  
-
+   
     const [search, setSearch] = useState("")
     const [message, setMessage] = useState()
-    const [Data, setData] = useState([{
+    const [data, setData] = useState([{
         Id: "",
         City: '',
         Weather: '',
@@ -25,7 +26,6 @@ export default function SearchField() {
     }
 
     const handleSubmit = e => {
-        e.preventDefault();
         getWeather()
     }
 
@@ -37,6 +37,7 @@ export default function SearchField() {
     }
 
     const getWeather = () => {
+        console.log("this is getWeather", search)
         Axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=${search},us&appid=${REACT_APP_APIKEY}`)
         .then((response) =>  {
             
@@ -66,81 +67,44 @@ export default function SearchField() {
             setMessage("Please enter a valid zip code"); 
             })
     }
+          
+  useEffect(() => {
+        let zip = localStorage.getItem("zip")
+        setSearch(zip)
+        console.log(zip)
+        getWeather()
+    }, [])  
      
- /*    useEffect(() => {
-        if(search === null){
-             let search = localStorage.getItem("zip")
-            console.log(search)
-            let zip = JSON.parse(localStorage.getItem("zip"))
-            setSearch(zip)
-            console.log(search)
-            getWeather()
-        } console.log(search)
-    },[]) */
-     
+
 
     /* TODO: 
-    -fill out README */
+    -fill out README
+    -update API key
+    put in an If local storage is empty check 
+    */
 
     return (
-        <div className="container">
-            <WeatherDisplay
-                key={Data.id} 
-                City={Data.City}
-                Icon={Data.Icon}
-                Weather={Data.Weather}
-                MainTemp={Data.MainTemp}
-                MinTemp={Data.MinTemp}
-                MaxTemp={Data.MaxTemp}  />
-              
-                <hr></hr>
-            <form onClick={handleKeypress}>
-                <label >Zip Code:</label><br />
-                <input type="text"  onChange={handleChange}></input>
-                <button onClick={handleSubmit}>Update</button>
-            </form> 
-    
-       
-{/*       <div className="container">
-            <h2>{message ? message:null}</h2>
-                {Data.City ? <h1>{Data.City}</h1> : <></> }
-                {Data.Icon ? <img src={Data.Icon} alt="weather icon"/> : <></> }
-                {Data.Weather ? <h2>{Data.Weather}</h2> : <></> }
-                {Data.MainTemp ? <h3>{Data.MainTemp}°</h3> : <></> }
-                {Data.MinTemp ? <h5>{Data.MinTemp}°</h5> : <></> }
-                {Data.MaxTemp ? <h5>{Data.MaxTemp}°</h5> : <></> }
-        </div> */}
-      
-      {/* 
         <main className="container">
-            <section className="header">
-                <h1 className="cityName">New York</h1> 
-                <img src="http://openweathermap.org/img/w/03d.png" alt="weather icon" className="icon"/>
-            </section>
+            {/* if error display error message: */}
+            {message ? <h1 className="cityName">{message}</h1> :null} 
 
-            <section>
-                <h4 className="weatherDescription">Scattered Thundershowers</h4>
-            </section> 
+            {/* if no error display data: */}
+            <WeatherDisplay
+                key={data.id} 
+                City={data.City}
+                Icon={data.Icon}
+                Weather={data.Weather}
+                MainTemp={data.MainTemp}
+                MinTemp={data.MinTemp}
+                MaxTemp={data.MaxTemp}  />  
 
-            <section>
-                <h3 className="mainTemp">16<sup className="mainTemp degree">&deg;</sup></h3> 
-            </section>
+            <hr/>
 
-            <section className="maxMin">
-                <h5 className="minTemp">52<sup className="degree">&deg;</sup></h5> 
-                <h5 className="maxTemp">72<sup className="degree">&deg;</sup></h5> 
-            </section>
-
-            <form className="inputForm" onClick={handleKeypress}>
-                <hr />
-                <label class="zipLabel">Zip Code:</label><br />
+            <form onClick={handleKeypress}>
+                <label className="zipLabel">Zip Code:</label><br />
                 <input type="text"  onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Update</button>
             </form> 
-        </main> */}
-
-        </div>
-
-
+        </main>
     )
 }
