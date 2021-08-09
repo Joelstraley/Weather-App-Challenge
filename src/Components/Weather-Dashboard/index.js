@@ -101,16 +101,24 @@ export default function WeatherDashboard() {
             <section className="header">
                 <h1 className="cityName">New York</h1> 
                 <img src="http://openweathermap.org/img/w/03d.png" alt="weather icon" className="icon"/>
-                
             </section>
-            <h4 className="weatherDescription">Scattered Thunderstorms</h4> 
-                <h3 className="mainTemp">67°</h3> 
-                <h5 className="minTemp">52°</h5> 
-                <h5 className="maxTemp">72°</h5> 
 
-            <form className="" onClick={handleKeypress}>
-            <hr/>
-                <label >Zip Code:</label><br />
+            <section>
+                <h4 className="weatherDescription">Scattered Thundershowers</h4>
+            </section> 
+
+            <section>
+                <h3 className="mainTemp">16<sup className="mainTemp degree">&deg;</sup></h3> 
+            </section>
+
+            <section>
+                <h5 className="minTemp maxMin">52<sup className="mainTemp degree">&deg;</sup></h5> 
+                <h5 className="maxTemp maxMin">72<sup className="mainTemp degree">&deg;</sup></h5> 
+            </section>
+
+            <form className="inputForm" onClick={handleKeypress}>
+                <hr />
+                <label class="zipLabel">Zip Code:</label><br />
                 <input type="text"  onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Update</button>
             </form> 

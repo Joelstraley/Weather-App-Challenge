@@ -55,7 +55,6 @@
 .cityName {
   font-weight: 400;
   font-size: 2rem;
-  align-self: center;
 }
 
 .icon {
@@ -73,17 +72,69 @@
 
 .weatherDescription {
   position: relative;
-
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: -1.5rem;
 }
 
 .mainTemp {
-
+  font-weight: 400;
+  font-size: 2rem;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .minTemp {
-
+  font-weight: 400;
 }
 
 .maxTemp {
+  font-weight: 400;
+}
 
+.maxMin {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.degree {
+  font: .75em 'Fira Sans', sans-serif;
+}
+
+hr {
+  margin-bottom: 20px;
+}
+
+.zipLabel {
+  margin-left: -130px;
+  font-size: 12px;
+}
+
+input {
+  width: 5em;
+  padding: 5px;
+  background: #fff;
+  color: #45474b;
+  border-radius: 2px;
+  border: 1px solid #1111115d;
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.2);
+  font-weight: 200;
+  font-size: 12px;
+}
+
+input:focus {
+  outline: none
+}
+
+button {
+  padding: 5px 30px 5px 30px;
+  margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: small;
+  box-shadow: initial;
+  border-radius: 5px;
+  border: 1px solid #1111115d;
+  box-shadow:  0px 1px 2px rgba(0, 0, 0, 0.2);
 }
